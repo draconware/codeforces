@@ -2,15 +2,21 @@
 using namespace std;
 
 int main(){
-    int n;
-    cin>>n;
+	int n;
+	cin>>n;
 
-    int a=0,b=0,c=0,x;
-    for(int i=0;i<n;i++){
-        cin>>x;a+=x;
-        cin>>x;b+=x;
-        cin>>x;c+=x;
-    }
-    if(a==0 && b==0 && c==0){cout<<"YES"<<endl;}
-    else{cout<<"NO"<<endl;}
+	int arr[n];
+	for(int i=0;i<n;i++){cin>>arr[i];}
+
+	int idx=0;
+	int res[n];
+	memset(res,0,sizeof(res));
+	for(int i=1;i<n;i++){
+		if(arr[idx] > arr[i]){res[idx]++;}
+		else{
+			idx = i;
+			res[idx]++;
+		}
+	}
+	for(int i=0;i<n;i++){cout<<res[i]<<" ";}cout<<endl;
 }

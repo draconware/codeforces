@@ -1,31 +1,53 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef pair<int, int> ii;
-ll hsh[27];
-int main() {
-    string s;
-    int n;
-    int c;
-    ll k;
-    cin >> n >> k;
-    cin >> s;
-    for (int i = 0; i < n; ++i) {
-        c = s[i] - 'A';
-        hsh[c]++;
-    }
-    sort(hsh, hsh + 27, greater<int>());
-    ll ans = 0L;
-    for (int i = 0; i < 26 && k > 0; ++i) {
-        ll cnt = hsh[i];
-        if (k >= cnt) {
-            ans = ans + (cnt * cnt);
-            k -= cnt;
-        } else {
-            ans = ans + (1ll * k * k);
-            break;
-        }
-    }
-    cout << ans;
-    return 0;
+
+int main(){
+	int n,m;
+	cin>>n>>m;
+
+	string s;
+
+	bool flag=true;
+	if(n>=m){
+		if(n-m > 1){
+			flag=false;
+		}else{
+			int i=n,j=m;
+			while(i>=0 && j>=0){
+				s.push_back('0');
+				s.push_back('1');
+				i--;j--;
+			}
+			while(i>=0){
+				s.push_back('0');i--;
+			}
+		}
+	}else{
+		if(m-n == 1){
+			int i=n,j=m;
+			while(i>=0 && j>=0){
+				s.push_back('1');
+				s.push_back('0');
+				i--;j--;
+			}
+			while(i>=0){s.push_back('1');m--;}
+		}else{
+			int i=n;j=m;
+			while(j-i > 1){
+				s.push_back('1');
+				s.push_back('1');
+				s.push_back('0');
+				i--;j-=2;
+			}
+			while(i>=0 && j>=0){
+				s.push_back('1');
+				s.push_back('0');
+				i--;j--;
+			}
+			while(i>=0){
+				s.push_back('1');i--;
+			}
+		}
+	}
+	cout<<s<<endl;
 }

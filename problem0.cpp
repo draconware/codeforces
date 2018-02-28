@@ -2,33 +2,36 @@
 using namespace std;
 
 int main(){
-    int n;
-    cin>>n;
+	#ifndef ONLINE_JUDGE
+  	freopen("input.in","r",stdin);
+ 	freopen("output.out","w",stdout);
+  	#endif
+	
+	int n;
+	cin>>n;
 
-    int arr[n];
-    for(int i=0;i<n;i++){cin>>arr[i];}
+	string str;
+	cin>>str;
 
-    bool flag=true,flag2=false;
-    bool mark[3];
-    int x=0;
-    memset(mark,0,sizeof(mark));
-    for(int i=1;i<n;i++){
-        if(arr[i] > arr[i-1]){
-            if(mark[0] && x!=0){flag=false;break;}
-            mark[0]=true;x=0;
-        }
-        if(arr[i] == arr[i-1]){
-            if(mark[1] && x!=1){flag=false;break;}
-            mark[0]=true;
-            mark[1]=true;x=1;
-        }
-        if(arr[i] < arr[i-1]){
-            if(mark[2] && x!=2){flag=false;break;}
-            mark[0]=true;
-            mark[1]=true;
-            mark[2]=true;x=2;
-        }
-    }
-    if(flag){cout<<"YES"<<endl;}
-    else{cout<<"NO"<<endl;}
+	int s=0;
+	while(s<n && str[s]!='1'){
+		s++;
+	}
+	if(s==n){cout<<"0"<<endl;return 0;}
+	int arr[n+9],k=0,ans=0;
+	bool flag=false;
+	for(int i=s;i<n;i++){
+		if(str[i]=='1'){
+			ans++;flag=false;
+		}else{
+			if(flag){arr[k++]=0;ans=0;}
+			else{arr[k++]=ans;ans=0;flag=true;}
+		}
+		//cout<<ans<<" "<<i<<endl;
+	}
+	if(ans>0){arr[k++]=ans;}
+	for(int i=0;i<k;i++){
+		cout<<arr[i];
+	}
+	cout<<endl;
 }
